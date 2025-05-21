@@ -4,13 +4,18 @@ import joblib
 import os
 
 # Load mô hình
-MODEL_PATH = os.path.join("models", "rf_model.pkl")
-model = joblib.load(MODEL_PATH)
+MODEL_PATH = os.path.join("models", "xgb_model.pkl")  # Đổi từ rf_model.pkl thành xgb_model.pkl
+try:
+    model = joblib.load(MODEL_PATH)
+    print(f"Đã tải mô hình từ {MODEL_PATH}")
+except FileNotFoundError as e:
+    print(f"Lỗi: {e}. Vui lòng chạy train_xgb_and_save.py để tạo mô hình.")
+    exit(1)
 
 # Hàm dự đoán
 def predict(file):
     if file is None:
-        return "No file"
+        return "No file", None
     df = pd.read_csv(file.name)
     if "label" in df.columns:
         df = df.drop(columns=["label"])
