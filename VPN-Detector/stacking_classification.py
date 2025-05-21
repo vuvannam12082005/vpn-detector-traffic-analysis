@@ -9,7 +9,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.svm import SVC
 from sklearn.ensemble import GradientBoostingClassifier
 
-#read data
+# Read data
 yes_df = pd.read_csv('clean_data/vpn120s_cleaned.csv')
 no_df = pd.read_csv('clean_data/novpn120s_cleaned.csv')
 
@@ -18,14 +18,14 @@ no_df = pd.read_csv('clean_data/novpn120s_cleaned.csv')
 yes_df['label'] = 1  
 no_df['label'] = 0   
 
-#combine 2 dataset
+# combine 2 dataset
 combined_df = pd.concat([yes_df, no_df], ignore_index=True)
 
 # separate features and specify target variable
 X = combined_df.drop(columns=['label'])
 y = combined_df['label']
 
-#split the data
+# split the data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
 cpu_cores=12

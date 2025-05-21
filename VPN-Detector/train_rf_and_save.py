@@ -1,9 +1,3 @@
-"""
-Train a quick Random‑Forest on clean_data/vpn_15s.csv
-and save to models/rf_model.pkl
-Run: python train_rf_and_save.py
-"""
-
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
@@ -11,8 +5,9 @@ from sklearn.metrics import classification_report
 import joblib
 import os
 
-# ⚙️ 1) Đọc dữ liệu – sửa tên file tương ứng dữ liệu của bạn
-DATA_PATH = r"clean_data\vpn_15s_labeled.csv"        # đổi sang file bạn có
+# ⚙️ 1) Đọc dữ liệu 
+DATA_PATH = "clean_data/vpn15s_labeled.csv"  # Đổi sang forward slash
+
 df = pd.read_csv(DATA_PATH)
 
 # ⚙️ 2) Giả sử cột nhãn tên 'label'
@@ -41,4 +36,4 @@ print(classification_report(y_test, rf.predict(X_test)))
 # ⚙️ 5) Lưu mô hình
 os.makedirs("models", exist_ok=True)
 joblib.dump(rf, "models/rf_model.pkl")
-print("\n✅ Saved model to models/rf_model.pkl")
+print("\n Saved model to models/rf_model.pkl")

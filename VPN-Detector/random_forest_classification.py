@@ -7,7 +7,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder
 
-#read data
+# read data
 yes_df = pd.read_csv('clean_data/vpn15s_cleaned.csv')
 no_df = pd.read_csv('clean_data/novpn15s_cleaned.csv')
 
@@ -16,17 +16,17 @@ no_df = pd.read_csv('clean_data/novpn15s_cleaned.csv')
 yes_df['label'] = 1  
 no_df['label'] = 0   
 
-#combine 2 dataset
+# combine 2 dataset
 combined_df = pd.concat([yes_df, no_df], ignore_index=True)
 
 # separate features and specify target variable
 X = combined_df.drop(columns=['label'])
 y = combined_df['label']
 
-#split the data
+# split the data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-#specifying the category and numerical columns
+# specifying the category and numerical columns
 cate_cols=[cname for cname in X_train.columns if X_train[cname].dtype=="object"]
 nume_cols=[cname for cname in X_train.columns if X_train[cname].dtype in ['int64','float64']]
 
@@ -58,8 +58,8 @@ def get_accuracy_score(n,traX,reaX,traY,reaY):
     accuracy_test=accuracy_score(reaY,predict_val)
     return accuracy_test
 
-#finding best tree number to maximize accuracy
-n_list=[100,200,500,1000,2000,4000,5000,6000,7000,8000,10000]
+# finding best tree number to maximize accuracy
+n_list=[100,200,500,1000,2000,4000]  #500 is best number of trees
 accuracy_data=[]
 for i in n_list:
     print("\n")
