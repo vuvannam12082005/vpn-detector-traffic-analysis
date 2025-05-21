@@ -12,8 +12,6 @@ RUN pip install --no-cache-dir --upgrade pip \
  && pip install --no-cache-dir -r requirements.txt
 
 # 4) Copy toàn bộ source code vào /app
-#    (bao gồm: make_dataset.py, train_rf_and_save.py, gradio_app.py,
-#     thư mục clean_data/ chứa các .csv gốc, và models/ nếu đã có)
 COPY . .
 
 # 5) Tạo chắc chắn các thư mục tồn tại
@@ -23,14 +21,17 @@ RUN mkdir -p clean_data \
 # 6) Chạy script make_dataset.py để sinh file labeled CSV
 RUN python make_dataset.py || echo "make_dataset.py exited (ok if file already exists)"
 
-# 7) Liệt kê thư mục clean_data để kiểm tra (tùy chọn, dùng để debug)
+# Debug: Kiểm tra file trong clean_data/
 RUN ls -l clean_data
 
-# 8) Chạy script train_rf_and_save.py để train Random Forest và lưu models/rf_model.pkl
-RUN python train_rf_and_save.py || echo "train_rf_and_save.py exited (ok if model already exists)"
+# 7) Chạy script train_xgb_and_save.py để train XGBoost và lưu models/xgb_model.pkl
+RUN python train_xgb_and_save.py || echo "train_xgb_and_save.py exited (ok if model already exists)"
 
-# 9) Expose cổng 7860 để Gradio lắng nghe
+# Debug: Kiểm tra file trong models/
+RUN ls -l models
+
+# 8) Expose cổng 7860 để Gradio lắng nghe
 EXPOSE 7860
 
-# 10) Lệnh mặc định khi container khởi động: chạy Gradio demo
+# 9) Lệnh mặc định khi container khởi động: chạy Gradio demo
 CMD ["python", "gradio_app.py"]
