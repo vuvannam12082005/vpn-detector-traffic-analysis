@@ -52,7 +52,7 @@ VPN-Detector/
 
 git clone https://github.com/vuvannam12082005/vpn-detector-traffic-analysis.git
 cd vpn-detector-traffic-analysis
-cd VPN-Detect
+cd VPN-Detector
 docker build -t vpn-detector .
 docker run -p 7860:7860 vpn-detector    # Open http://localhost:7860
 
