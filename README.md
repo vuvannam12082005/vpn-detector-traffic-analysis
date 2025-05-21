@@ -49,4 +49,31 @@ VPN-Detector/
 └── README.md
 ```
 
-.....(5-9)
+## 5. Quick Start
+git clone https://github.com/vuvannam12082005/vpn-detector-traffic-analysis.git
+cd vpn-detector-traffic-analysis
+cd VPN-Detect
+docker build -t vpn-detector .
+docker run -p 7860:7860 vpn-detector    # open http://localhost:7860
+
+## 6. Results (30 % unseen test)
+Window	Best single F1	Ensemble F1	ROC-AUC
+15 s	0.90 (RF)	0.95	0.98
+30 s	0.91 (SVM)	0.95	0.98
+60 s	0.93 (LGBM)	0.95	0.99
+120 s	0.92 (Cat)	0.95	0.98
+
+<div align="center"> <img src="shap_beeswarm.png" width="650"> </div>
+Top-5 important features: fwd_pkt_per_sec, pkt_len_mean, tls_ja3_hash, …
+
+## 7. How to Reproduce
+# example: train 15 s Random Forest
+python scripts/train_lr_rf_15s.py           # outputs models/rf_15s.pkl
+
+# build ensemble (loads all *.pkl from models/)
+python stacking_all.py                      # outputs models/ensemble.pkl
+
+## 8. License
+MIT – free to use with attribution. 
+http://cicresearch.ca/CICDataset/ISCX-VPN-NonVPN-2016/Dataset/
+https://www.kaggle.com/code/vojtchschiller/vpn-non-vpn-traffic-classification
