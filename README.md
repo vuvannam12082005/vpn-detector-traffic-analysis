@@ -28,7 +28,8 @@ We used the **ISCX VPN-nonVPN 2016** dataset. The original `.arff` files were cl
 | novpn60s_cleaned.csv   | 17.1k   | Non-VPN (0) |
 | vpn120s_cleaned.csv    | 11k     | VPN (1)     |
 | novpn120s_cleaned.csv  | 10k     | Non-VPN (0) |
-```text
+
+```
 
 > Cleaned data is stored in the `clean_data/` directory.
 
@@ -48,7 +49,7 @@ We used the **ISCX VPN-nonVPN 2016** dataset. The original `.arff` files were cl
 | 30s         | XGBoost    |
 | 60s         | XGBoost    |
 | 120s        | XGBoost    |
-```text
+```
 
 ### 📊 Model Evaluation
 - 5-fold cross-validation
@@ -74,7 +75,7 @@ VPN-Detector/
 ├── train_rf_and_save.py     # Train & save model
 ├── scripts/                 # Other training scripts
 └── README.md
-```text
+```
 
 ---
 
@@ -93,7 +94,7 @@ docker run -p 7860:7860 vpn-detector
 
 # Open the app at:
 http://localhost:7860
-```bash
+```
 
 ---
 
@@ -106,7 +107,7 @@ http://localhost:7860
 | 30 seconds  | 0.93             | 0.98    |
 | 60 seconds  | 0.91             | 0.98    |
 | 120 seconds | 0.92             | 0.98    |
-```text
+```
 
 ---
 
@@ -115,7 +116,7 @@ http://localhost:7860
 ### Train XGBoost for 15s Window:
 ```bash
 python scripts/train_rf_and_save.py
-```bash
+```
 
 You can modify and re-run for other window sizes accordingly.
 
