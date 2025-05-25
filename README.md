@@ -115,7 +115,7 @@ http://localhost:7860
 
 ### Train XGBoost for 15s Window:
 ```bash
-python scripts/train_rf_and_save.py
+python scripts/train_xgb_and_save.py
 ```
 
 You can modify and re-run for other window sizes accordingly.
